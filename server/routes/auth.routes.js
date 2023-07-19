@@ -1,13 +1,11 @@
 const {Router} = require ("express");
 const {check, validationResult} = require ('express-validator')
-
 const User = require('../models/User/User.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+require("dotenv").config()
 
 const router = Router()
-
-const jwtKey = 'secretKey'
 
 router.post('/registration',
   [
@@ -51,7 +49,7 @@ router.post('/login',
         return res.status(400).json({message: 'Invalid password'})
       }
 
-      const token = jwt.sign({id: user.id}, jwtKey, {expiresIn: '1h'})
+      const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {expiresIn: '1h'})
       return res.json({
         token,
         user: {
