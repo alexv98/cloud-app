@@ -2,6 +2,7 @@ import React, { type FC, Suspense } from 'react'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { Navbar } from 'widgets/Navbar'
 import { useTheme } from 'app/providers/ThemeProvider'
+import { AppRouter } from 'app/providers/router/AppRouter'
 
 export const App: FC = () => {
   const { theme } = useTheme()
@@ -11,7 +12,7 @@ export const App: FC = () => {
       <Suspense fallback=''>
         <Navbar />
         <div className='content-page'>
-          content
+          <AppRouter />
         </div>
       </Suspense>
     </div>

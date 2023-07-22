@@ -1,7 +1,7 @@
 .Navbar {
   width: 100%;
   height: var(--navbar-height);
-  background-color: var(--inverted-bg-color);
+  background-color: var(--inverted-primary-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,16 +10,24 @@
 
   h4 {
     font-size: 24px;
-    color: var(--bg-color)
+    color: var(--primary-color)
   }
 
-  &__btns {
+  &__links {
     display: flex;
     align-items: center;
   }
 
-  &__btn {
-    margin-left: 20px;
+  &__link {
+    margin-right: 20px;
+    font-weight: bold;
+    &:hover {
+      border-bottom: 1px solid var(--primary-color);
+    }
+  }
 
+  &__theme {
+    padding-left: 20px;
+    border-left: 1px solid var(--primary-color);
   }
 }

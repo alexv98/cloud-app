@@ -1,0 +1,42 @@
+.Auth {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    min-width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid var(--inverted-primary-color);
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  &__btn {
+    &:first-of-type {
+      font-size: 14px;
+      &:hover {
+        scale: 1.05;
+      }
+    }
+
+    &:last-of-type {
+      border-radius: 20px;
+    }
+  }
+}

@@ -5,18 +5,13 @@ import cls from './Button.module.scss'
 export enum ButtonTheme {
   DEFAULT = 'default',
   OUTLINED = 'outlined',
-  DEFAULT_INVERTED = 'defaultInverted'
-}
-
-export enum ButtonSize {
-  M = 'size_m',
-  L = 'size_l',
+  SOLID = 'solid'
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   theme?: ButtonTheme
-  size?: ButtonSize
+  hovered?: boolean
   disabled?: boolean
 }
 
@@ -25,19 +20,19 @@ export const Button = memo((props: ButtonProps) => {
     className,
     children,
     theme = ButtonTheme.DEFAULT,
-    size = ButtonSize.M,
     disabled = false,
+    hovered = false,
     ...otherProps
   } = props
 
   const mods: Mods = {
-    [cls.disabled]: disabled
+    [cls.disabled]: disabled,
+    [cls.hovered]: hovered
   }
 
   const additional = [
     className,
-    cls[theme],
-    cls[size]
+    cls[theme]
   ]
 
   return (

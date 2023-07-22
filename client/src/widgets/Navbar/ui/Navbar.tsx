@@ -1,8 +1,8 @@
 import React, { type FC } from 'react'
 import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './Navbar.module.scss'
-import { Button, ButtonTheme } from 'shared/ui/Button/Button'
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher'
+import { AppLink } from 'shared/ui/AppLink/AppLink'
 
 interface NavbarProps {
   className?: string
@@ -11,15 +11,21 @@ interface NavbarProps {
 export const Navbar: FC = ({ className }: NavbarProps) => {
   return (
     <div className={classNames(cls.Navbar, {}, [className])}>
-      <h4>CLOUD DISK</h4>
-      <div className={cls.Navbar__btns}>
-        <ThemeSwitcher />
-        <Button
-          theme={ButtonTheme.DEFAULT}
-          className={cls.Navbar__btn}
+      <h4>
+        <AppLink to={'/'}>
+          CLOUD DISK
+        </AppLink>
+      </h4>
+      <div className={cls.Navbar__links}>
+        <AppLink
+          className={cls.Navbar__link}
+          to={'/login'}
         >
           Войти
-        </Button>
+        </AppLink>
+        <div className={cls.Navbar__theme}>
+          <ThemeSwitcher />
+        </div>
       </div>
     </div>
   )

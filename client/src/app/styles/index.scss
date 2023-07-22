@@ -5,6 +5,19 @@
 
 .app {
   font: var(--font-m);
-  background: var(--bg-color);
+  background: var(--primary-color);
   min-height: 100vh;
+}
+
+.content-page {
+  max-width: 1140px;
+  height: calc(100vh - var(--navbar-height) - 20px);
+  margin: 0 auto;
+  padding: 15px;
+  color: var(--inverted-primary-color);
+}
+
+.page-wrapper {
+  width: inherit;
+  height: inherit;
 }
