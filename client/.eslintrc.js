@@ -51,7 +51,8 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': 'warn',
     'react/display-name': 'warn',
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
-    '@typescript-eslint/naming-convention': 'warn'
+    '@typescript-eslint/naming-convention': 'warn',
+    '@typescript-eslint/no-dynamic-delete': 'warn',
   }
 }
 

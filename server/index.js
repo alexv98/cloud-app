@@ -1,14 +1,15 @@
 const express = require ('express')
 const mongoose = require ("mongoose")
 const authRouter = require('./routes/auth.routes.js')
-require("dotenv").config()
+const corsMiddleware = require('./middleware/cors.middleware')
+require('dotenv').config()
 
 const app = express()
 const PORT = process.env.PORT
 
+app.use(corsMiddleware)
 app.use(express.json())
 app.use('/api/auth', authRouter)
-
 
 const start = async () => {
   try {
