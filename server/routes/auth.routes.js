@@ -1,9 +1,11 @@
 const {Router} = require ("express");
 const {check, validationResult} = require ('express-validator')
-const User = require('../models/User/User.js')
+const User = require('../models/User.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+const fileService = require('../services/fileService')
+const File = require('../models/File')
 
 const router = Router()
 
@@ -36,7 +38,7 @@ router.post(
 			const hashPassword = await bcrypt.hash(password, 8)
 			const user = new User({ name, lastname, email, password: hashPassword })
 			await user.save()
-			
+			await fileService.createDir(new File({ user: user.id, name: '' }))
 			const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
 				expiresIn: '1h',
 			})
