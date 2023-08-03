@@ -1,37 +1,37 @@
 import {
-	configureStore,
-	type CombinedState,
-	type Reducer,
-	type ReducersMapObject,
+  configureStore,
+  type CombinedState,
+  type Reducer,
+  type ReducersMapObject
 } from '@reduxjs/toolkit'
 import { type StateSchema } from 'app/providers/StoreProvider/config/StateSchema'
 import { createReducerManager } from 'app/providers/StoreProvider/config/reducerManager'
+import { fileReducer } from 'entities/FIle'
 import { userReducer } from 'entities/User'
-import { useNavigate } from 'react-router-dom'
 
-export function createReduxStore(
-	initialState?: StateSchema,
-	asyncReducers?: ReducersMapObject<StateSchema>,
-	navigate?: ReturnType<typeof useNavigate>
+export function createReduxStore (
+  initialState?: StateSchema,
+  asyncReducers?: ReducersMapObject<StateSchema>
 ) {
-	const rootReducer: ReducersMapObject<StateSchema> = {
-		user: userReducer,
-		...asyncReducers,
-	}
+  const rootReducer: ReducersMapObject<StateSchema> = {
+    user: userReducer,
+    file: fileReducer,
+    ...asyncReducers
+  }
 
-	const reducerManager = createReducerManager(rootReducer)
+  const reducerManager = createReducerManager(rootReducer)
 
-	const store = configureStore({
-		reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
-		devTools: __IS_DEV__,
-		preloadedState: initialState,
-		middleware: getDefaultMiddleware => getDefaultMiddleware({}),
-	})
+  const store = configureStore({
+    reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
+    devTools: __IS_DEV__,
+    preloadedState: initialState,
+    middleware: getDefaultMiddleware => getDefaultMiddleware({})
+  })
 
-	//@ts-ignore
-	store.reducerManager = reducerManager
+  // @ts-expect-error
+  store.reducerManager = reducerManager
 
-	return store
+  return store
 }
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch']

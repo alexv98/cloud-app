@@ -1,0 +1,45 @@
+.MainPageHeader {
+  margin-bottom: 20px;
+}
+
+.btns {
+  width: 100%;
+  display: flex;
+
+  &__right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    
+    button {
+      width: fit-content;
+      &:first-of-type {
+        padding-top: 12px;
+        margin-bottom: 26px;
+      }
+    }
+  }
+
+  &__sort {
+    margin-right: 26px;
+  }
+
+  &__grid {
+    *{
+      &:not(:last-child) {
+        margin-right: 6px;
+      }
+    }
+  }
+}
+
+
+
+.title {
+  font-weight: bold;
+}

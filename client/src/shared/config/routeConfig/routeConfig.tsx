@@ -1,13 +1,17 @@
-import { type RouteProps } from 'react-router-dom'
-import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage'
-import { MainPage } from 'pages/MainPage'
 import { AuthPage } from 'pages/AuthPage'
+import { MainPage } from 'pages/MainPage'
+import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage'
+import { type RouteProps } from 'react-router-dom'
 
 export enum AppRoutes {
   MAIN = 'main',
   LOGIN = 'login',
 
-  NOT_FOUND = 'not_found'
+  NOT_FOUND = 'not_found',
+}
+
+type AppRoutesProps = RouteProps & {
+  authOnly?: boolean
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -17,14 +21,15 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.NOT_FOUND]: '*'
 }
 
-export const routeConfig: Record<AppRoutes, RouteProps> = {
+export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePath.main,
-    element: <MainPage />
+    element: <MainPage />,
+    authOnly: true
   },
   [AppRoutes.LOGIN]: {
     path: RoutePath.login,
-    element: <AuthPage/>
+    element: <AuthPage />
   },
 
   [AppRoutes.NOT_FOUND]: {

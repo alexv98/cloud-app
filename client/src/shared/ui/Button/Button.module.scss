@@ -35,3 +35,8 @@
     border-color: var(--inverted-primary-color);
   }
 }
+
+.rounded {
+  border: 1px solid var(--inverted-primary-color);
+  border-radius: 37px;
+}

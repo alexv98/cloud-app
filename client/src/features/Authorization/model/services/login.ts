@@ -6,31 +6,31 @@ import { type IUser } from 'entities/User/model/types/user'
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localStorage'
 
 interface LoginByUsernameProps {
-	email: string
-	password: string
+  email: string
+  password: string
 }
 
 export const login = createAsyncThunk<
-	IUser,
-	LoginByUsernameProps,
-	ThunkConfig<string>
+IUser,
+LoginByUsernameProps,
+ThunkConfig<string>
 >('login', async (authData, { dispatch, rejectWithValue }) => {
-	try {
-		const response = await axios.post<IUser>(
-			'http://localhost:3000/api/auth/login',
-			authData
-		)
-		if (!response.data) {
-			throw new Error()
-		}
-		dispatch(userActions.setAuthData(response.data))
-		localStorage.setItem(
-			USER_LOCALSTORAGE_KEY,
-			JSON.stringify(response.data.token)
-		)
+  try {
+    const response = await axios.post<IUser>(
+      'http://localhost:3000/api/auth/login',
+      authData
+    )
+    if (!response.data) {
+      throw new Error()
+    }
+    dispatch(userActions.setAuthData(response.data))
+    localStorage.setItem(
+      USER_LOCALSTORAGE_KEY,
+      JSON.stringify(response.data.token)
+    )
 
-		return response.data
-	} catch (e) {
-		return rejectWithValue('error')
-	}
+    return response.data
+  } catch (e) {
+    return rejectWithValue('error')
+  }
 })

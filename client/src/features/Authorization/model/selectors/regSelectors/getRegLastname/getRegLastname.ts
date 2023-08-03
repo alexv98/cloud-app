@@ -1,4 +1,4 @@
-import { StateSchema } from 'app/providers/StoreProvider'
+import { type StateSchema } from 'app/providers/StoreProvider'
 
 export const getRegLastname = (state: StateSchema) =>
-	state?.regForm?.lastname || ''
+  state?.regForm?.lastname || ''
