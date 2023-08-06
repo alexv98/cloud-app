@@ -3,6 +3,7 @@ import { type ThunkConfig } from 'app/providers/StoreProvider'
 import axios from 'axios'
 import { type IUser, userActions } from 'entities/User'
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localStorage'
+import { fileActions } from 'entities/FIle'
 
 export const auth = createAsyncThunk<IUser, undefined, ThunkConfig<string>>(
   'auth',
@@ -19,6 +20,7 @@ export const auth = createAsyncThunk<IUser, undefined, ThunkConfig<string>>(
       )
       if (response.data.token) {
         dispatch(userActions.setAuthData(response.data))
+        dispatch(fileActions.setCurrentDir(response.data.id))
         localStorage.setItem(
           USER_LOCALSTORAGE_KEY,
           JSON.stringify(response.data.token)

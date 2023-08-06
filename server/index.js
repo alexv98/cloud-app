@@ -1,5 +1,5 @@
-const express = require ('express')
-const mongoose = require ("mongoose")
+const express = require('express')
+const mongoose = require('mongoose')
 const authRouter = require('./routes/auth.routes.js')
 const fileRouter = require('./routes/file.routes.js')
 const corsMiddleware = require('./middleware/cors.middleware')
@@ -17,7 +17,7 @@ const start = async () => {
   try {
     await mongoose.connect(process.env.DB_URL)
     app.listen(PORT, () => {
-      console.log('Server started on port', PORT)
+      console.log('Server started on port: ', PORT)
     })
   } catch (e) {
     console.log(e)

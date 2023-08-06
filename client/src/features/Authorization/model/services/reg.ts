@@ -4,6 +4,7 @@ import axios from 'axios'
 import { userActions } from 'entities/User'
 import { type IUser } from 'entities/User/model/types/user'
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localStorage'
+import { fileActions } from 'entities/FIle'
 
 interface registrationProps {
   name: string
@@ -27,6 +28,7 @@ ThunkConfig<string>
     }
 
     dispatch(userActions.setAuthData(response.data))
+    dispatch(fileActions.setCurrentDir(response.data.id))
     localStorage.setItem(
       USER_LOCALSTORAGE_KEY,
       JSON.stringify(response.data.token)

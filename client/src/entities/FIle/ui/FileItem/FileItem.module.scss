@@ -1,0 +1,27 @@
+.FileItem {
+  margin: 10px 0;
+  display: grid;
+  grid-template-columns: 1fr 4fr repeat(4, 1fr);
+  align-items: center;
+  border-bottom: solid 2px var(--inverted-primary-color);
+  padding-bottom: 5px;
+  transition: all .2s ease;
+
+  &:hover {
+    scale: 1.02;
+    cursor: pointer;
+  }
+
+  &__img {
+    justify-self: center;
+  }
+
+  &__date {
+    grid-column-start: 5;
+    justify-self: center;
+  }
+  &__size {
+    grid-column-start: 6;
+    justify-self: center;
+  }
+}

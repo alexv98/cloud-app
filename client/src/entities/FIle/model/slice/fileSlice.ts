@@ -1,10 +1,14 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { fileFetching } from 'features/FileHandlers/model/services/fileFetching'
+import { fileFetching } from 'features/Files/model/services/FileFetching/fileFetching'
 import { type FileSchema, type IFile } from '../types/file'
+import { createDir } from 'features/Files/model/services/CreateDir/createDir'
 
 const initialState: FileSchema = {
   error: '',
-  isLoading: false
+  isLoading: false,
+  data: [],
+  currentDir: '',
+  showModal: false
 }
 
 const fileSlice = createSlice({
@@ -13,6 +17,9 @@ const fileSlice = createSlice({
   reducers: {
     setCurrentDir: (state, action: PayloadAction<string>) => {
       state.currentDir = action.payload
+    },
+    setShowModal: (state, action: PayloadAction<boolean>) => {
+      state.showModal = action.payload
     }
   },
   extraReducers (builder) {
@@ -35,6 +42,24 @@ const fileSlice = createSlice({
         state.error = action.payload
         state.isLoading = false
         state.data = []
+      })
+
+      .addCase(createDir.pending, state => {
+        state.error = undefined
+        state.isLoading = true
+      })
+      .addCase(
+        createDir.fulfilled,
+        (state, action: PayloadAction<IFile>) => {
+          state.isLoading = false
+          state.data.push(action.payload)
+        }
+      )
+
+      // TODO: will fix type any
+      .addCase(createDir.rejected, (state, action: any) => {
+        state.error = action.payload
+        state.isLoading = false
       })
   }
 })

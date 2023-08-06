@@ -4,6 +4,7 @@ import axios from 'axios'
 import { userActions } from 'entities/User/model/slice/userSlice'
 import { type IUser } from 'entities/User/model/types/user'
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localStorage'
+import { fileActions } from 'entities/FIle'
 
 interface LoginByUsernameProps {
   email: string
@@ -24,6 +25,7 @@ ThunkConfig<string>
       throw new Error()
     }
     dispatch(userActions.setAuthData(response.data))
+    dispatch(fileActions.setCurrentDir(response.data.id))
     localStorage.setItem(
       USER_LOCALSTORAGE_KEY,
       JSON.stringify(response.data.token)
