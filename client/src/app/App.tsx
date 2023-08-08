@@ -5,6 +5,7 @@ import { Suspense, useEffect, type FC } from 'react'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { Navbar } from 'widgets/Navbar'
+import { Loader } from 'shared/ui/Loader/Loader'
 
 export const App: FC = () => {
   const { theme } = useTheme()
@@ -16,7 +17,7 @@ export const App: FC = () => {
 
   return (
     <div className={classNames('app', {}, [theme])}>
-      <Suspense fallback=''>
+      <Suspense fallback={<Loader />}>
         <Navbar />
         <div className='content-page'>
           <AppRouter />

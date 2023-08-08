@@ -1,5 +1,4 @@
 import { type FC, useCallback } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
 import BackIcon from 'shared/assets/icons/back.svg'
 import BigGridIcon from 'shared/assets/icons/bigGridIcon.svg'
 import RowIcon from 'shared/assets/icons/rowIcon.svg'
@@ -10,7 +9,8 @@ import { Button, ButtonTheme } from 'shared/ui/Button/Button'
 import { Text } from 'shared/ui/Text/Text'
 import cls from './MainPageHeader.module.scss'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
-import { fileActions } from 'entities/FIle'
+import { fileActions, getFiles } from 'entities/FIle'
+import { useSelector } from 'react-redux'
 
 interface MainPageHeaderProps {
   className?: string
@@ -18,10 +18,7 @@ interface MainPageHeaderProps {
 }
 
 const MainPageHeader: FC<MainPageHeaderProps> = (props) => {
-  const searchParams = useSearchParams()
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
   const { className, name } = props
 
   const openModal = useCallback(() => {
@@ -34,17 +31,15 @@ const MainPageHeader: FC<MainPageHeaderProps> = (props) => {
       {/* <Text title="TITLE" align={TextAlign.CENTER} className={cls.title} /> */}
       <div className={cls.btns}>
         <div className={cls.btns__left}>
-          {searchParams[0].size > 0 && (
-            <Button
-              theme={ButtonTheme.OUTLINED}
-              onClick={() => {
-                navigate(-1)
-              }}
-              rounded
-            >
-              <BackIcon />
-            </Button>
-          )}
+          <Button
+            theme={ButtonTheme.OUTLINED}
+            onClick={() => {
+
+            }}
+            rounded
+          >
+            <BackIcon />
+          </Button>
           <Button
             theme={ButtonTheme.OUTLINED}
             rounded

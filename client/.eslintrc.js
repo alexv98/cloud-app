@@ -53,6 +53,8 @@ module.exports = {
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/naming-convention': 'warn',
     '@typescript-eslint/no-dynamic-delete': 'warn',
+    'no-mixed-spaces-and-tabs': 'warn'
+    'no-tabs': 'warn'
   }
 }
 

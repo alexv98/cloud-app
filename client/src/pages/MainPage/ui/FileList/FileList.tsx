@@ -12,7 +12,7 @@ interface FileListProps {
 const FileList: FC<FileListProps> = (props) => {
   const dispatch = useAppDispatch()
 
-  const onClickFile = useCallback((id: string) => {
+  const openFileHandler = useCallback((id: string) => {
     dispatch(fileActions.setCurrentDir(id))
   }, [])
 
@@ -20,7 +20,7 @@ const FileList: FC<FileListProps> = (props) => {
     <FileItem
       key={index}
       file={file}
-      onClick={() => { onClickFile(file._id) }}
+      onClick={() => { openFileHandler(file._id) }}
     />
   ))
 
