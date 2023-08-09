@@ -1,9 +1,10 @@
-import { getFiles, getCurrentId, fileActions, FileItem } from 'entities/FIle'
+import { fileActions, FileItem, getFiles } from 'entities/FIle'
 import { type FC, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './FileList.module.scss'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
+import { type CurrentDir } from 'entities/FIle/model/types/file'
 
 interface FileListProps {
   className?: string
@@ -12,15 +13,15 @@ interface FileListProps {
 const FileList: FC<FileListProps> = (props) => {
   const dispatch = useAppDispatch()
 
-  const openFileHandler = useCallback((id: string) => {
-    dispatch(fileActions.setCurrentDir(id))
+  const openFileHandler = useCallback((dir: CurrentDir) => {
+    dispatch(fileActions.setCurrentDir(dir))
   }, [])
 
   const data = useSelector(getFiles)?.map((file, index) => (
     <FileItem
       key={index}
       file={file}
-      onClick={() => { openFileHandler(file._id) }}
+      onClick={() => { openFileHandler({ id: file._id, name: file.name }) }}
     />
   ))
 

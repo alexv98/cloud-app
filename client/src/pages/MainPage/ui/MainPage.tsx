@@ -1,6 +1,5 @@
-import { getCurrentId, getFiles } from 'entities/FIle'
 import { fileFetching } from 'features/Files'
-import { useEffect, type FC } from 'react'
+import { type FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
@@ -9,23 +8,24 @@ import cls from './MainPage.module.scss'
 import MainPageHeader from './MainPageHeader/MainPageHeader'
 import { Modal } from 'widgets/Modal/Modal'
 import { getShowModal } from 'entities/FIle/model/selectors/getShowModal/getShowModal'
+import { useGetCurrentDir } from 'entities/FIle/model/hooks/useGetCurrentDir'
 
 interface MainPageProps {
   className?: string
 }
 
-const MainPage: FC = ({ className }: MainPageProps) => {
+const MainPage: FC<MainPageProps> = ({ className }) => {
   const dispatch = useAppDispatch()
-  const currentDir = useSelector(getCurrentId)
+  const { dirStack, currentDir } = useGetCurrentDir()
   const isShowModal = useSelector(getShowModal)
 
   useEffect(() => {
     dispatch(fileFetching(currentDir))
-  }, [currentDir])
+  }, [dirStack])
 
   return (
     <div className={classNames(cls.MainPage, {}, [className])}>
-      <MainPageHeader name={currentDir} />
+      <MainPageHeader/>
       <FileList />
       {isShowModal && <Modal />}
     </div>

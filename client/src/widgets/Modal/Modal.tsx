@@ -1,12 +1,12 @@
-import React, { type ChangeEvent, type FC, useCallback, useState } from 'react'
+import React, { type FC, useCallback, useState } from 'react'
 import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './Modal.module.scss'
 import { Input } from 'shared/ui/Input/Input'
 import { Button } from 'shared/ui/Button/Button'
 import { createDir } from 'features/Files/model/services/CreateDir/createDir'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
-import { useSelector } from 'react-redux'
-import { fileActions, getCurrentId } from 'entities/FIle'
+import { fileActions } from 'entities/FIle'
+import { useGetCurrentDir } from 'entities/FIle/model/hooks/useGetCurrentDir'
 
 interface ModalProps {
   className?: string
@@ -15,13 +15,13 @@ interface ModalProps {
 export const Modal: FC = ({ className }: ModalProps) => {
   const [dirName, setDirname] = useState('')
   const dispatch = useAppDispatch()
-  const currentDir = useSelector(getCurrentId)
+  const { dirStack, currentDir } = useGetCurrentDir()
 
   const createDirHandler = async () => {
     await dispatch(createDir({
       name: dirName,
       type: 'dir',
-      parent: currentDir
+      parent: currentDir.id
     }))
     dispatch(fileActions.setShowModal(false))
   }

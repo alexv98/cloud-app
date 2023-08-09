@@ -14,14 +14,19 @@ export interface IFile {
 
 export interface FileSchema {
   data: IFile[]
-  currentDir?: string
   showModal: boolean
   error?: string
   isLoading?: boolean
+  dirStack: CurrentDir[]
 }
 
 export interface IDir {
   name: string
   type: 'dir'
   parent: string
+}
+
+export interface CurrentDir {
+  id: string
+  name?: string
 }

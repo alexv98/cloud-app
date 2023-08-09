@@ -1,25 +1,30 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { fileFetching } from 'features/Files/model/services/FileFetching/fileFetching'
-import { type FileSchema, type IFile } from '../types/file'
+import { type CurrentDir, type FileSchema, type IFile } from '../types/file'
 import { createDir } from 'features/Files/model/services/CreateDir/createDir'
 
 const initialState: FileSchema = {
   error: '',
   isLoading: false,
   data: [],
-  currentDir: '',
-  showModal: false
+  showModal: false,
+  dirStack: []
 }
 
 const fileSlice = createSlice({
   name: 'file',
   initialState,
   reducers: {
-    setCurrentDir: (state, action: PayloadAction<string>) => {
-      state.currentDir = action.payload
+    setCurrentDir: (state, action: PayloadAction<CurrentDir>) => {
+      state.dirStack.push(action.payload)
     },
     setShowModal: (state, action: PayloadAction<boolean>) => {
       state.showModal = action.payload
+    },
+    setLastCurrentDir: (state) => {
+      if (state.dirStack.length > 1) {
+        state.dirStack.pop()
+      }
     }
   },
   extraReducers (builder) {

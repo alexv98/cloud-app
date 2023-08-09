@@ -28,7 +28,7 @@ ThunkConfig<string>
     }
 
     dispatch(userActions.setAuthData(response.data))
-    dispatch(fileActions.setCurrentDir(response.data.id))
+    dispatch(fileActions.setCurrentDir({ id: response.data.id }))
     localStorage.setItem(
       USER_LOCALSTORAGE_KEY,
       JSON.stringify(response.data.token)

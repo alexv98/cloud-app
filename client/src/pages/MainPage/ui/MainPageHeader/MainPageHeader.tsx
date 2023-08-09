@@ -6,40 +6,47 @@ import SmallGridIcon from 'shared/assets/icons/smallGridIcon.svg'
 import SortIcon from 'shared/assets/icons/sort.svg'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { Button, ButtonTheme } from 'shared/ui/Button/Button'
-import { Text } from 'shared/ui/Text/Text'
+import { Text, TextAlign } from 'shared/ui/Text/Text'
 import cls from './MainPageHeader.module.scss'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
-import { fileActions, getFiles } from 'entities/FIle'
-import { useSelector } from 'react-redux'
+import { fileActions } from 'entities/FIle'
+import { useGetCurrentDir } from 'entities/FIle/model/hooks/useGetCurrentDir'
 
 interface MainPageHeaderProps {
   className?: string
-  name: string
 }
 
-const MainPageHeader: FC<MainPageHeaderProps> = (props) => {
+const MainPageHeader: FC = ({ className }: MainPageHeaderProps) => {
   const dispatch = useAppDispatch()
-  const { className, name } = props
+  const { dirStack, currentDir } = useGetCurrentDir()
 
   const openModal = useCallback(() => {
     dispatch(fileActions.setShowModal(true))
   }, [dispatch])
 
+  const backClickHandler = useCallback(() => {
+    dispatch(fileActions.setLastCurrentDir())
+  }, [dispatch])
+
   return (
     <div className={classNames(cls.MainPageHeader, {}, [className])}>
-      <Text title={name} />
-      {/* <Text title="TITLE" align={TextAlign.CENTER} className={cls.title} /> */}
+      <Text
+        title={dirStack.length > 1 ? currentDir.name : 'Корневая директория'}
+        align={TextAlign.CENTER}
+        className={cls.title}
+      />
       <div className={cls.btns}>
         <div className={cls.btns__left}>
-          <Button
-            theme={ButtonTheme.OUTLINED}
-            onClick={() => {
-
-            }}
-            rounded
-          >
-            <BackIcon />
-          </Button>
+          {
+            (dirStack.length > 1) &&
+            <Button
+              theme={ButtonTheme.OUTLINED}
+              onClick={backClickHandler}
+              rounded
+            >
+              <BackIcon />
+            </Button>
+          }
           <Button
             theme={ButtonTheme.OUTLINED}
             rounded

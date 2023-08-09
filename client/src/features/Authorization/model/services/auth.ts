@@ -20,7 +20,7 @@ export const auth = createAsyncThunk<IUser, undefined, ThunkConfig<string>>(
       )
       if (response.data.token) {
         dispatch(userActions.setAuthData(response.data))
-        dispatch(fileActions.setCurrentDir(response.data.id))
+        dispatch(fileActions.setCurrentDir({ id: response.data.id }))
         localStorage.setItem(
           USER_LOCALSTORAGE_KEY,
           JSON.stringify(response.data.token)

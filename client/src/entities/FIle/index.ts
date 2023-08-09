@@ -1,5 +1,5 @@
 export { FileItem } from './ui/FileItem/FileItem'
-export { getCurrentId } from './model/selectors/getCurrentId/getCurrentId'
+export { getDirStack } from './model/selectors/getDirStack/getDirStack'
 export { getFiles } from './model/selectors/getFiles/getFiles'
 export { fileActions, fileReducer } from './model/slice/fileSlice'
 export type { FileSchema, FileType, IFile } from './model/types/file'
