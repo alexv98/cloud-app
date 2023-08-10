@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { fileFetching } from 'features/Files/model/services/FileFetching/fileFetching'
 import { type CurrentDir, type FileSchema, type IFile } from '../types/file'
 import { createDir } from 'features/Files/model/services/CreateDir/createDir'
+import { uploadFile } from 'features/Files/model/services/uploadFile/uploadFile'
 
 const initialState: FileSchema = {
   error: '',
@@ -63,6 +64,24 @@ const fileSlice = createSlice({
 
       // TODO: will fix type any
       .addCase(createDir.rejected, (state, action: any) => {
+        state.error = action.payload
+        state.isLoading = false
+      })
+
+      .addCase(uploadFile.pending, state => {
+        state.error = undefined
+        state.isLoading = true
+      })
+      .addCase(
+        uploadFile.fulfilled,
+        (state, action: PayloadAction<IFile>) => {
+          state.isLoading = false
+          state.data.push(action.payload)
+        }
+      )
+
+      // TODO: will fix type any
+      .addCase(uploadFile.rejected, (state, action: any) => {
         state.error = action.payload
         state.isLoading = false
       })

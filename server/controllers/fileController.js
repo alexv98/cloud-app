@@ -58,7 +58,7 @@ class FileController {
       if(parent) {
         path = `${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`
       } else {
-        path = `${process.env.FILE_PATH}\\${user._id}\\${file.name}`
+        path = `${process.env.FILE_PATH}\\${req.body.parent}\\${file.name}`
       }
 
       if(fs.existsSync(path)) {
@@ -72,7 +72,7 @@ class FileController {
         type,
         size: file.size,
         path: parent?._id,
-        parent: parent?._id,
+        parent: parent?._id ? parent._id : req.body.parent,
         user: user._id
       })
 

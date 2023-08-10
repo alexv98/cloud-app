@@ -6,6 +6,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  margin-bottom: 26px;
 
   &__right {
     margin-left: auto;
@@ -21,9 +22,14 @@
       width: fit-content;
       &:first-of-type {
         padding-top: 12px;
-        margin-bottom: 26px;
+        margin-right: 2 0px;
       }
     }
+  }
+
+  &__createBlock {
+    display: flex;
+    align-items: center;
   }
 
   &__sort {
@@ -39,9 +45,19 @@
   }
 }
 
-
-
 .title {
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.upload {
+
+  &__label {
+    cursor: pointer;
+    margin-left: 20px;
+  }
+
+  &__input {
+    display: none;
+  }
 }
