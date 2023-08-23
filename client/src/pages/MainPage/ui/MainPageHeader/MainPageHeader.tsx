@@ -51,6 +51,7 @@ const MainPageHeader: FC = ({ className }: MainPageHeaderProps) => {
               theme={ButtonTheme.OUTLINED}
               onClick={backClickHandler}
               rounded
+              className={cls.btns__back}
             >
               <BackIcon />
             </Button>

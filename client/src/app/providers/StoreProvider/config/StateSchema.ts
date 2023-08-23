@@ -8,10 +8,12 @@ import {
 import { type FileSchema } from 'entities/FIle'
 import { type UserSchema } from 'entities/User/model/types/user'
 import { type LoginSchema, type RegSchema } from 'features/Authorization'
+import { type DragDropFilesSchema } from 'features/DragDropFiles'
 
 export interface StateSchema {
   user: UserSchema
   file: FileSchema
+  dragDropFiles: DragDropFilesSchema
 
   // async reducers
   loginForm?: LoginSchema

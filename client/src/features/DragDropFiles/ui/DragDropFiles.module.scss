@@ -1,0 +1,9 @@
+.DragDropFiles {
+  height: calc(100vh - var(--navbar-height) - 2*var(--page-padding));
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-xl);
+  border: 1px dashed var(--inverted-primary-color);
+}

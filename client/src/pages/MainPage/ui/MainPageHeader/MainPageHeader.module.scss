@@ -22,9 +22,13 @@
       width: fit-content;
       &:first-of-type {
         padding-top: 12px;
-        margin-right: 2 0px;
+        margin-right: 20px;
       }
     }
+  }
+
+  &__back {
+    margin-bottom: 20px;
   }
 
   &__createBlock {

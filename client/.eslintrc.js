@@ -54,7 +54,8 @@ module.exports = {
     '@typescript-eslint/naming-convention': 'warn',
     '@typescript-eslint/no-dynamic-delete': 'warn',
     'no-mixed-spaces-and-tabs': 'warn',
-    'no-tabs': 'warn'
+    'no-tabs': 'warn',
+    'react/prop-types': 'warn'
   }
 }
 
